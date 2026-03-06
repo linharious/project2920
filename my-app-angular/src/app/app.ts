@@ -1,10 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Counter } from './components/counter/counter';
+import { ListProducts } from './components/list-products/list-products';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, CommonModule],
+  imports: [RouterOutlet, CommonModule, Counter, ListProducts],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
@@ -17,7 +19,7 @@ export class App {
   isActive = true;
   textColor = 'red';
   fontSize = 50;
-
+  counterName = 'legs set';
   isLoggedIn = true;
 
   clickButton() {
