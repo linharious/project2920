@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>search a github user</h2>
+  <div>
+    <input
+      type = 'text'
+      placeholder = 'enter your name ...'
+      [(ngModel)]="username"
+    />
+
+    <button (click)="searchUser()">search</button>
+  </div>
+
+
+
+  <div *ngIf="errorMsg" class="error">
+    {{errorMsg}}
+  </div>
+
+  <div class="user-card">
+    <img [src]="userData.avatar_url"/>
+    <div class="info">
+      <h3>{{userData.name}}</h3>
+      <p *ngIf="userData.Bio">Bio: {{userData.bio}}</p>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- <h1>CAT FACTS</h1>
+<h2>{{catFact}}</h2> -->
