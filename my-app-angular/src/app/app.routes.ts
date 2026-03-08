@@ -4,7 +4,7 @@ import { ListProducts } from './components/list-products/list-products';
 import { GithubUsers } from './components/github-users/github-users';
 import { Login } from './components/login/login';
 import { Signup } from './components/signup/signup';
-import { MaterialLists } from './components/material-lists/material-lists';
+import { MaterialList } from './components/material-list/material-list';
 
 export const routes: Routes = [
   {path: 'counter', component: Counter},
@@ -12,5 +12,5 @@ export const routes: Routes = [
   {path: 'github', component: GithubUsers},
   {path: 'login', component: Login},
   {path: 'signup', component: Signup},
-  {path: 'material', component: MaterialLists}
+  {path: 'material', component: MaterialList}
 ];

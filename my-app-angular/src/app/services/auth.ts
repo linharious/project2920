@@ -17,17 +17,31 @@ export interface User {
 @Injectable({
   providedIn: 'root',
 })
+
 export class Auth {
 
-  private readonly apiUrl = 'https://squid-app-a6n9k.ondigitalocean.app/';
+  private readonly apiUrl = 'https://squid-app-a6n9k.ondigitalocean.app';
   constructor(private readonly http: HttpClient) {}
 
-  login(email: String, password: String ): Observable<AuthResponse>{
-    return this.http.post<any>(`${this.apiUrl}auth/login`, {email, password});
+  login(email: string, password: string ): Observable<AuthResponse>{
+    return this.http.post<AuthResponse>(`${this.apiUrl}/auth/login`, {email, password});
   }
 
-  signup(name: String, email: String, password: String, program: String): Observable<AuthResponse>{
-    return this.http.post<any>(`${this.apiUrl}auth/signup`, {name, email, password, program});
+  signup(name: string, email: string, password: string, program: string): Observable<AuthResponse>{
+    return this.http.post<AuthResponse>(`${this.apiUrl}/auth/signup`, {name, email, password, program});
+  }
+
+  setToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  getAuthHeaders() {
+    const token = this.getToken();
+    return {Authorization: `Bearer ${token}`}
   }
 
 }

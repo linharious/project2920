@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MaterialLists } from './material-lists';
+import { MaterialList } from './material-list';
 
 describe('MaterialLists', () => {
-  let component: MaterialLists;
-  let fixture: ComponentFixture<MaterialLists>;
+  let component: MaterialList;
+  let fixture: ComponentFixture<MaterialList>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MaterialLists],
+      imports: [MaterialList],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(MaterialLists);
+    fixture = TestBed.createComponent(MaterialList);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
