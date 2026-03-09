@@ -1,19 +1,22 @@
 <div class="page-container">
-
-
   <div class="material-list">
-
     <div *ngFor="let m of material" class="material-card">
       <div class="card-content">
         <h4>
-          {{m.title}}
+          {{ m.title }}
         </h4>
-        <p class="meta">{{m.course_code}} - {{m.course_name}}</p>
-        <p class="meta">professor: {{m.professor}} - {{m.semester}}</p>
-        <p class="description">description: {{m.description}}</p>
-        <small class="card-author">by: {{m.posted_by_user.email}}</small>
+        <p class="meta">{{ m.course_code }} - {{ m.course_name }}</p>
+        <p class="meta">Professor: {{ m.professor }} - {{ m.semester }}</p>
+        <p class="description">Description: {{ m.description }}</p>
+        <small class="card-author">By: {{ m.posted_by_user.email }}</small>
       </div>
 
+      <div class="card-actions">
+        <a class="btn btn-view" [href]="m.url" target="_blank">View</a>
+
+        <a class="btn btn-view" [routerLink]="['/material', m.id, 'edit']">Edit</a>
+        <button class="btn btn-danger" (click)="deleteMaterial(m.id)">Delete</button>
+      </div>
     </div>
   </div>
 </div>

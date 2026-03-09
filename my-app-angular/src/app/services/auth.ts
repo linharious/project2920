@@ -9,26 +9,30 @@ export interface AuthResponse {
 
 export interface User {
   email: string;
-    id: string;
-    name: string;
-    program: string;
+  id: string;
+  name: string;
+  program: string;
 }
 
 @Injectable({
   providedIn: 'root',
 })
-
 export class Auth {
-
   private readonly apiUrl = 'https://squid-app-a6n9k.ondigitalocean.app';
   constructor(private readonly http: HttpClient) {}
 
-  login(email: string, password: string ): Observable<AuthResponse>{
-    return this.http.post<AuthResponse>(`${this.apiUrl}/auth/login`, {email, password});
+  private currentUser: User | null = null;
+  login(email: string, password: string): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.apiUrl}/auth/login`, { email, password });
   }
 
-  signup(name: string, email: string, password: string, program: string): Observable<AuthResponse>{
-    return this.http.post<AuthResponse>(`${this.apiUrl}/auth/signup`, {name, email, password, program});
+  signup(name: string, email: string, password: string, program: string): Observable<AuthResponse> {
+    return this.http.post<AuthResponse>(`${this.apiUrl}/auth/signup`, {
+      name,
+      email,
+      password,
+      program,
+    });
   }
 
   setToken(token: string) {
@@ -39,9 +43,21 @@ export class Auth {
     return localStorage.getItem('token');
   }
 
-  getAuthHeaders() {
-    const token = this.getToken();
-    return {Authorization: `Bearer ${token}`}
+  clearToken() {
+    localStorage.removeItem('token');
+    this.currentUser = null;
   }
 
+  getAuthHeaders() {
+    const token = this.getToken();
+    return { Authorization: `Bearer ${token}` };
+  }
+
+  setCurrentUser(user: User) {
+    this.currentUser = user;
+  }
+
+  getCurrentUser(): User | null {
+    return this.currentUser;
+  }
 }

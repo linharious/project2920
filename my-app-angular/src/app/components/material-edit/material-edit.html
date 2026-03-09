@@ -1,0 +1,42 @@
+<div class="form-view">
+  <div class="header">
+    <h1>Edit Material</h1>
+  </div>
+
+  <p class="error" *ngIf="errorMsg">{{ errorMsg }}</p>
+
+  <form (ngSubmit)="submit()" class="material-form">
+    <label>
+      Course Code
+      <input [(ngModel)]="form.course_code" name="course_code" type="text" />
+    </label>
+    <label>
+      Course Name
+      <input [(ngModel)]="form.course_name" name="course_name" type="text" />
+    </label>
+    <label>
+      Professor
+      <input [(ngModel)]="form.professor" name="professor" type="text" />
+    </label>
+    <label>
+      Semester
+      <input [(ngModel)]="form.semester" name="semester" type="text" placeholder="2024.1" />
+    </label>
+    <label>
+      Title
+      <input [(ngModel)]="form.title" name="title" type="text" />
+    </label>
+    <label>
+      Url
+      <input [(ngModel)]="form.url" name="url" type="text" placeholder="https://..." />
+    </label>
+    <label>
+      Description
+      <input [(ngModel)]="form.description" name="description" type="text" />
+    </label>
+
+    <button type="submit" class="btn btn-primary" [disabled]="submitting">
+      {{ submitting ? 'Updating...' : 'Update' }}
+    </button>
+  </form>
+</div>

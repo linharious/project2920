@@ -4,14 +4,14 @@
   align-items: center;
   flex-direction: column;
   height: 100vh;
-  background: linear-gradient(135deg, rgb(127,214, 250), rgb(38, 177, 241));
+  background: linear-gradient(135deg, rgb(137, 214, 250), rgb(38, 177, 241));
 }
 
 form {
   background-color: rgba(255, 255, 255, 0.699);
   padding: 32px;
   border-radius: 8px;
-  box-shadow: 0 8px 16px rgba(0, 0,0, 0.2);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   width: 100%;
   max-width: 360px;
   text-align: center;
@@ -44,7 +44,7 @@ button {
   width: 100%;
   padding: 12px;
   background: rgb(117, 230, 117);
-  color: rgb(80, 79,79);
+  color: rgb(80, 79, 79);
   border: none;
   border-radius: 8px;
   font-size: 16px;
@@ -56,6 +56,6 @@ button {
 }
 
 .error {
-  color: red;
+  color: rgb(250, 71, 71);
   margin-bottom: 12px;
 }

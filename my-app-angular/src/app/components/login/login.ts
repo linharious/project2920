@@ -10,13 +10,13 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './login.scss',
 })
 export class Login {
-  email = "";
-  password = "";
-  errorMsg = "";
+  email = '';
+  password = '';
+  errorMsg = '';
 
   constructor(
     private readonly auth: Auth,
-    private readonly router: Router
+    private readonly router: Router,
   ) {}
 
   submit() {
@@ -24,15 +24,15 @@ export class Login {
       next: (res) => {
         console.log(res);
         this.errorMsg = '';
-
+        this.auth.setToken(res.access_token);
+        this.auth.setCurrentUser(res.user);
         // if successful login --> go inside the app
-        this.router.navigate(["/material"]);
+        this.router.navigate(['/material']);
       },
       error: (err) => {
         this.errorMsg = err.error.error;
         // console.log(this.errorMsg);
-      }
-    })
+      },
+    });
   }
-
 }

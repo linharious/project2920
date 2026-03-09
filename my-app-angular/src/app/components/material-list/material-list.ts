@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Material } from '../../services/material';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { Auth } from '../../services/auth';
 
 @Component({
   selector: 'app-material-list',
@@ -10,21 +11,54 @@ import { RouterLink } from '@angular/router';
   styleUrl: './material-list.scss',
 })
 export class MaterialList {
-
   material: Material[] = [];
 
-  constructor(private readonly materialService: Material) {
+  constructor(
+    private readonly materialService: Material,
+    private readonly authService: Auth,
+    private readonly router: Router,
+  ) {
+    if (!this.authService.getToken()) {
+      this.router.navigate(['/login']);
+    }
+    this.loadMaterials();
+    // this.materialService.listAll().subscribe({
+    //   next: (res) => {
+    //     // console.log(res)
+    //     this.material = res;
+    //   },
+    //   error: (err) => {
+    //     console.log(err);
+    //     this.material;
+    //   },
+
+    //   // most of the case error is when the token is expired
+    // });
+  }
+
+  loadMaterials() {
     this.materialService.listAll().subscribe({
       next: (res) => {
-        // console.log(res)
         this.material = res;
       },
-      error: (err) => {
-        console.log(err);
-        this.material
-      }
+      error: () => {
+        this.authService.clearToken();
+        this.router.navigate(['/login']);
+      },
+    });
+  }
 
-        // most of the case error is when the token is expired
-    })
+  deleteMaterial(id: string) {
+    if (!confirm('Do you want to delete this material?')) {
+      return;
+    }
+    this.materialService.delete(id).subscribe({
+      next: () => {
+        this.loadMaterials();
+      },
+      error: (err) => {
+        alert(err.error.error);
+      },
+    });
   }
 }
